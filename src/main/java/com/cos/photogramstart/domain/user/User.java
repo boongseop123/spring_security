@@ -18,11 +18,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//번호 증가 전략이 데이터베이스를 따라간다
     private int id;
+    @Column(length=20, unique = true)//중복된 값 들어가지 않도록
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String name;
     private String website;
     private String bio;//자기소개
+    @Column(nullable = false)
     private String email;
     private String phone;
     private String gender;
@@ -33,5 +37,4 @@ public class User {
     public void createDate(){
         this.createDate=LocalDateTime.now();
     }
-
 }
