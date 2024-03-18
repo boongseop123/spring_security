@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -33,15 +34,17 @@ public class AuthController {
     }
 
     @PostMapping("/auth/signup")
-    public String signUp(@Valid SignupDto signupDto, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            Map<String,String> errorMap=new HashMap<>();
-            for(FieldError error: bindingResult.getFieldErrors()){
-                errorMap.put(error.getField(),error.getDefaultMessage());
+    public @ResponseBody String signUp(@Valid SignupDto signupDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
             }
+            throw new RuntimeException("유효성 검사 실패");
+        } else {
+            User user = signupDto.toEntity();
+            User userEntity = authService.Signup(user);
+            return "auth/signin";
         }
-        User user=signupDto.toEntity();
-        User userEntity = authService.Signup(user);
-        return "auth/signin";
     }
 }
