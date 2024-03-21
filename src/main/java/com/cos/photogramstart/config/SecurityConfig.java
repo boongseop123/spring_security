@@ -29,3 +29,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/");//로그인을 정상적으로 하면 이 url로 오도록
     }
 }
+//sdf
