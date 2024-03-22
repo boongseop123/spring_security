@@ -5,6 +5,7 @@ import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,32 +22,26 @@ import java.util.Map;
 @Controller//1. IOC, 2. 파일을 리턴하는 컨트롤러
 public class AuthController {
 
+    @Autowired
     private final AuthService authService;
 //    public AuthController(AuthService authService){
 //        this.authService=authService;//의존성 주입
 //    }
     @GetMapping("/auth/signin")
     public String signInForm(){
-        return "auth/signin";
+        return "/auth/signin";
     }
 
     @GetMapping("/auth/signup")
     public String signUpForm(){
-        return "auth/signup";
+        return "/auth/signup";
     }
 
     @PostMapping("/auth/signup")
-    public @ResponseBody String signUp(@Valid SignupDto signupDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-            throw new CustomValidationException("유효성 검사 실패",errorMap);
-        } else {
-            User user = signupDto.toEntity();
-            User userEntity = authService.Signup(user);
-            return "auth/signin";
-        }
+    public String signup(@Valid SignupDto signupDto,
+                         BindingResult bindingResult){
+        User user = signupDto.toEntity();
+        authService.Signup(user);
+        return "/auth/signin";
     }
 }
