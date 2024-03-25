@@ -25,6 +25,6 @@ public class UserService {
         userEntity.setWebsite(user.getWebsite());
         userEntity.setPhone(user.getPhone());
         userEntity.setGender(user.getGender());
-        return null;
+        return userEntity;
     }
 }
