@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //super 삭제->기존 시큐리티가 가지고 있는 기능이 다 비활성화
         http.csrf().disable();//postman이던, 홈페이지던 구분하지 않겠다.(csrf)비활성화
         http.authorizeRequests()
-                .antMatchers("/","/users/**","/image/**","/subscribe/**","/comment/**").authenticated()//이 주소는 인증이 필요
+                .antMatchers("/","/users/**","/image/**","/subscribe/**","/comment/**","/api/**").authenticated()//이 주소는 인증이 필요
                 .anyRequest().permitAll()//이 주소는 다 허용
                 .and()
                 .formLogin()//인증이 필요한 페이지에 접속을 시도하면
