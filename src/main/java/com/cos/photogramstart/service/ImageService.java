@@ -30,7 +30,7 @@ public class ImageService {
             e.printStackTrace();
         }
 
-        Image image=imageUploadDto.toEntity(imageFileName);
+        Image image=imageUploadDto.toEntity(imageFileName,principalDetails.getUser());
         Image imageEntity=imageRepository.save(image);
     }
 }
