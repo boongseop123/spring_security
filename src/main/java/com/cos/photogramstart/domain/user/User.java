@@ -1,6 +1,7 @@
 package com.cos.photogramstart.domain.user;
 
 import com.cos.photogramstart.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)//연관관계의 주인이 아니라고 명시, 테이블에 컬럼을 만들지 말라는 뜻, user를 select할때 해당 user id로 등록된 images를 다 가져와
+    @JsonIgnoreProperties({"user"})
     private List<Image> images;
     private LocalDateTime createDate;//자동으로 삽입됨
     @PrePersist//DB에 INSERT되기 직전에 실행

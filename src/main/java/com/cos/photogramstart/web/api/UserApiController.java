@@ -34,9 +34,7 @@ public class UserApiController {
         if(bindingResult.hasErrors()){
             Map<String,String> errorMap=new HashMap<>();
             for(FieldError error:bindingResult.getFieldErrors()){
-                System.out.println("=========");
-                System.out.println(error.getDefaultMessage());
-                System.out.println("=========");
+                errorMap.put(error.getField(),error.getDefaultMessage());
             }
             throw new CustomValidApiException("유효성 검사 실패함",errorMap);
         }

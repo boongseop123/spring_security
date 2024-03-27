@@ -18,7 +18,7 @@
 				</form>
 
 				<img class="profile-image" src="#"
-					onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
+					onerror="this.src='/images/person.jpeg'" id="userProfileImage"/>
 			</div>
 		</div>
 		<!--유저이미지end-->
@@ -39,7 +39,7 @@
 				<ul>
 					<li><a href=""> 게시물<span>3</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
+					<li><a href="javascript:subscribeInfoModalOpen();">구독정보<span>2</span>
 					</a></li>
 				</ul>
 			</div>
@@ -65,7 +65,7 @@
 				<!--아이템들-->
 				<c:forEach var="image" items="${user.images}">
 					<div class="img-box">
-						<a href=""> <img src="${postImageUrl}"/>
+						<a href=""> <img src="/upload/${image.postImageUrl}"/>
 						</a>
 						<div class="comment">
 							<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
@@ -110,9 +110,7 @@
 				<i class="fas fa-times"></i>
 			</button>
 		</div>
-
 		<div class="subscribe-list" id="subscribeModalList">
-
 			<div class="subscribe__item" id="subscribeModalItem-1">
 				<div class="subscribe__img">
 					<img src="#" onerror="this.src='/images/person.jpeg'"/>
@@ -124,8 +122,6 @@
 					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
 				</div>
 			</div>
-
-
 			<div class="subscribe__item" id="subscribeModalItem-2">
 				<div class="subscribe__img">
 					<img src="#" onerror="this.src='/images/person.jpeg'"/>
@@ -139,10 +135,7 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-
 <script src="/js/profile.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

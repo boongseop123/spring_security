@@ -26,7 +26,6 @@ public class UserController {
 
     @GetMapping("/user/{id}/update")
     public String update(@PathVariable Integer id, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        System.out.println(principalDetails.getUser());
         return "user/update";
     }
 }
