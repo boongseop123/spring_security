@@ -26,18 +26,32 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>${user.name}</h2>
+				<h2>${dto.user.name}</h2>
 
-				<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
-				<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
-				<button class="modi" onclick="popup('.modal-info')">
-					<i class="fas fa-cog"></i>
-				</button>
+				<c:choose>
+					<c:when test="${dto.pageOwnerState}">
+						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
+						<button class="modi" onclick="popup('.modal-info')">
+							<i class="fas fa-cog"></i>
+						</button>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${dto.subscribeState}">
+								<button class="cta blue" onclick="toggleSubscribe(${dto.user.id},this)">구독취소</button>
+							</c:when>
+							<c:otherwise>
+								<button class="cta" onclick="toggleSubscribe(${dto.user.id},this)">구독하기</button>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>3</span>
+					<li><a href=""> 게시물<span>${user.images.size()}</span>
 					</a></li>
 					<li><a href="javascript:subscribeInfoModalOpen();">구독정보<span>2</span>
 					</a></li>
