@@ -53,7 +53,7 @@
 				<ul>
 					<li><a href=""> 게시물<span>${user.images.size()}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();">구독정보<span>2</span>
+					<li><a href="javascript:subscribeInfoModalOpen();">구독정보<span>${dto.subscribeCount}</span>
 					</a></li>
 				</ul>
 			</div>
