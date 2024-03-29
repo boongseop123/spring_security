@@ -7,16 +7,25 @@ import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
+
+    @Transactional(readOnly = true)
+    public List<Image> imageStory(Integer principalId) {
+        List<Image> images = imageRepository.mStory(principalId);
+        return images;
+    }
     @Value("${file.path}")
     private String uploadFolder;
     public void imageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
