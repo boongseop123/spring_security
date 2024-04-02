@@ -8,7 +8,7 @@ public class CustomValidApiException extends RuntimeException {
     private Map<String, String> errorMap;
 
 
-    public CustomValidApiException(String message, Map<String, String> errorMap){
+    public CustomValidApiException(String message){
         super(message);
         this.errorMap=errorMap;
     }
