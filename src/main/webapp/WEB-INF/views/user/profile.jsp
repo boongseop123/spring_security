@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -10,15 +10,13 @@
 
 		<!--유저이미지-->
 		<div class="profile-left">
-			<div class="profile-img-wrap story-border"
-				onclick="popup('.modal-image')">
+			<div class="profile-img-wrap story-border" onclick="popup('.modal-image')">
+
 				<form id="userProfileImageForm">
-					<input type="file" name="profileImageFile" style="display: none;"
-						id="userProfileImageInput" />
+					<input type="file" name="profileImageFile" style="display: none;" id="userProfileImageInput" />
 				</form>
 
-				<img class="profile-image" src="#"
-					onerror="this.src='/images/person.jpeg'" id="userProfileImage"/>
+				<img class="profile-image" src="/upload/${dto.user.profileImageUrl}" onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
 			</div>
 		</div>
 		<!--유저이미지end-->
@@ -51,15 +49,15 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>${user.images.size()}</span>
+					<li><a href=""> 게시물<span>${dto.imageCount}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();">구독정보<span>${dto.subscribeCount}</span>
+					<li><a href="javascript:subscribeInfoModalOpen(${dto.user.id});"> 구독정보<span>${dto.subscribeCount}</span>
 					</a></li>
 				</ul>
 			</div>
 			<div class="state">
-				<h4>${user.bio}</h4>
-				<h4>${user.website}</h4>
+				<h4>${dto.user.bio}</h4>
+				<h4>${dto.user.website}</h4>
 			</div>
 		</div>
 		<!--유저정보 및 사진등록 구독하기-->
@@ -77,18 +75,16 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
-				<c:forEach var="image" items="${user.images}">
+				<c:forEach var="image" items="${dto.user.images}">
 					<div class="img-box">
-						<a href=""> <img src="/upload/${image.postImageUrl}"/>
+						<a href=""> <img src="/upload/${image.postImageUrl}" />
 						</a>
 						<div class="comment">
-							<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
+							<a href="#" class=""> <i class="fas fa-heart"></i><span>${image.likeCount}</span>
 							</a>
 						</div>
 					</div>
 				</c:forEach>
-
-
 				<!--아이템들end-->
 			</div>
 		</div>
@@ -109,7 +105,7 @@
 <div class="modal-image" onclick="modalImage()">
 	<div class="modal">
 		<p>프로필 사진 바꾸기</p>
-		<button onclick="profileImageUpload()">사진 업로드</button>
+		<button onclick="profileImageUpload(${dto.user.id}, ${principal.user.id})">사진 업로드</button>
 		<button onclick="closePopup('.modal-image')">취소</button>
 	</div>
 </div>
@@ -124,11 +120,16 @@
 				<i class="fas fa-times"></i>
 			</button>
 		</div>
+
 		<div class="subscribe-list" id="subscribeModalList">
-			
+
+
 		</div>
 	</div>
+
 </div>
+
+
 <script src="/js/profile.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

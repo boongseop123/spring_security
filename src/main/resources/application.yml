@@ -24,7 +24,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-      
+  # OAuth2 로그인 설정 ##############################################
+
   servlet:
     multipart:
       enabled: true
@@ -33,7 +34,19 @@ spring:
   security:
     user:
       name: test
-      password: 1234   
+      password: 1234
+
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 1705547313309846
+            client-secret: aa87dc96b977be38dc1749330eda8d0f
+            scope:
+              - public_profile
+              - email
+
+
 
 file:
   path: C:/workspace/springbootwork/upload/
